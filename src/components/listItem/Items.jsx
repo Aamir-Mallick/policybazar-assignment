@@ -10,7 +10,7 @@ import { Box } from "@mui/material";
 
 const Items = ({ id, firstName, avatar }) => {
   return (
-    <Box>
+    <Box data-testid='item'>
       <Link to={`details/${id}`}>
         <List
           sx={{ width: 360, bgcolor: "#b7dde5", borderRadius: "5px", m: 1 }}
