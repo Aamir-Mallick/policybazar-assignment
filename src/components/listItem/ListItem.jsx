@@ -2,31 +2,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { getList } from "../../store/listSlice";
 import { useEffect } from "react";
 import { Items } from "./Items";
+import { Box } from "@mui/material";
 import { PaginationComponent } from "../paginations/PaginationComponent";
 
 export const ListItem = () => {
   const dispatch = useDispatch();
   const listData = useSelector((state) => state.list);
+  const pageNumber = useSelector((state) => state.list.pageNumber);
 
   useEffect(() => {
     dispatch(getList());
   }, []);
 
-  return (
+  return listData?.data?.data?.length ? (
     <div>
-      Welcome
-      {console.log(typeof listData?.data?.page)}
-      <div>
-        {listData?.data?.data?.map(({ id, first_name, avatar }) => (
-          <Items key={id} id={id} firstName={first_name} avatar={avatar} />
-        ))}
-      </div>
-      <div>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "row",
+        }}
+      >
+        <Box>
+          {listData?.data?.data?.map(({ id, first_name, avatar }) => (
+            <Items key={id} id={id} firstName={first_name} avatar={avatar} />
+          ))}
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "row",
+        }}
+      >
         <PaginationComponent
-          pageNumber={listData?.data?.page}
+          pageNumber={pageNumber}
           countNumber={listData?.data?.total_pages}
         />
-      </div>
+      </Box>
     </div>
+  ) : (
+    <p>loading...</p>
   );
 };

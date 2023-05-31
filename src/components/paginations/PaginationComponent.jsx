@@ -3,9 +3,14 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { useDispatch } from "react-redux";
 import { getList } from "../../store/listSlice";
+import { useEffect } from "react";
 
 const PaginationComponent = ({ pageNumber, countNumber }) => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    localStorage.setItem("pageNumber", pageNumber);
+  }, [pageNumber]);
 
   const onPageChange = (event, value) => {
     dispatch(getList(value));
@@ -22,9 +27,9 @@ const PaginationComponent = ({ pageNumber, countNumber }) => {
   );
 };
 
-PaginationComponent.PropTypes = {
-  pageNumber: PropTypes.number,
-  countNumber: PropTypes.number,
+PaginationComponent.propTypes = {
+  pageNumber: PropTypes.number.isRequired,
+  countNumber: PropTypes.number.isRequired,
 };
 
 export { PaginationComponent };

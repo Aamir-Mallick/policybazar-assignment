@@ -6,18 +6,18 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
+import { Box } from "@mui/material";
 
 const Items = ({ id, firstName, avatar }) => {
   return (
-    <div>
+    <Box>
       <Link to={`details/${id}`}>
         <List
-          dense
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+          sx={{ width: 360, bgcolor: "#b7dde5", borderRadius: "5px", m: 1 }}
         >
           <ListItem>
             <ListItemButton>
-              <ListItemAvatar>
+              <ListItemAvatar sx={{ width: 200 }}>
                 <Avatar alt={`Avatar n°${id}`} src={`${avatar}`} />
               </ListItemAvatar>
               <ListItemText primary={`${firstName}`} />
@@ -25,12 +25,12 @@ const Items = ({ id, firstName, avatar }) => {
           </ListItem>
         </List>
       </Link>
-    </div>
+    </Box>
   );
 };
 
 Items.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number,
   firstName: PropTypes.string,
   avatar: PropTypes.string,
 };

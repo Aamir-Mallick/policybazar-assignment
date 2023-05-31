@@ -9,41 +9,59 @@ import Typography from "@mui/material/Typography";
 const DescriptionPage = ({ email, firstName, lastName, avatar }) => {
   return (
     <>
-      <div
-        style={{ width: "700px", margin: "2px auto", border: "1px solid red" }}
-      >
-        <Card sx={{ display: "flex" }}>
+      <Box display='flex' justifyContent={"center"}>
+        <Card
+          sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+        >
           <CardMedia
             component='img'
-            sx={{ width: 370 }}
-            md={{ width: 600 }}
+            sx={{ width: 380 }}
             image={`${avatar}`}
             alt='Live from space album cover'
           />
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box
+            sx={{
+              bgcolor: "#b7dde5",
+              width: 380,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <Box
               sx={{
-                pl: 2,
-                pr: 2,
-                pb: 1,
-                pt: 2,
+                bgcolor: "#b7dde5",
               }}
             >
               <CardContent>
-                <Typography sx={{ pt: 2 }} component='div' variant='h4'>
-                  {firstName}
-                </Typography>
-                <Typography sx={{ pt: 2 }} component='div' variant='h4'>
-                  {lastName}
-                </Typography>
-                <Typography sx={{ pt: 2 }} component='div' variant='h5'>
-                  {email}
-                </Typography>
+                <Box display='flex' sx={{ mt: 2 }}>
+                  <Typography sx={{ pr: 1 }} component='div' variant='h5'>
+                    First Name:
+                  </Typography>
+                  <Typography component='div' variant='h5'>
+                    {firstName}
+                  </Typography>
+                </Box>
+                <Box display='flex' sx={{ mt: 2 }}>
+                  <Typography sx={{ pr: 1 }} component='div' variant='h5'>
+                    Last Name:
+                  </Typography>
+                  <Typography component='div' variant='h5'>
+                    {lastName}
+                  </Typography>
+                </Box>
+                <Box display='flex' sx={{ mt: 2 }}>
+                  <Typography sx={{ pr: 1 }} component='div' variant='h5'>
+                    Email:
+                  </Typography>
+                  <Typography component='div' variant='h5'>
+                    {email}
+                  </Typography>
+                </Box>
               </CardContent>
             </Box>
           </Box>
         </Card>
-      </div>
+      </Box>
     </>
   );
 };

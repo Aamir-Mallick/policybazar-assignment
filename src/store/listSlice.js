@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   data: [],
+  error: "",
+  message: "",
+  pageNumber: 0,
 };
 
 const listSlice = createSlice({
@@ -10,6 +13,7 @@ const listSlice = createSlice({
   reducers: {
     fetchList(state, action) {
       state.data = action.payload;
+      state.pageNumber = action.payload.page;
     },
   },
 });
@@ -17,15 +21,19 @@ const listSlice = createSlice({
 export const { fetchList } = listSlice.actions;
 export default listSlice.reducer;
 
-export function getList(pageNo) {
+export function getList(pageNo = 1) {
   return async function getListThunk(dispatch) {
-    const response = await fetch(
-      `https://reqres.in/api/users?page=${pageNo}&per_page=5`,
-      {
-        method: "GET",
-      }
-    );
-    const data = await response.json();
-    dispatch(fetchList(data));
+    try {
+      const response = await fetch(
+        `https://reqres.in/api/users?page=${pageNo}&per_page=5`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await response.json();
+      dispatch(fetchList(data));
+    } catch (error) {
+      dispatch(fetchList([]));
+    }
   };
 }
